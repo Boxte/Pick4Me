@@ -1,6 +1,26 @@
 import React from 'react';
 import logo from './logo.svg';
+
+import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+
 import './App.css';
+
+const Dictaphone = () => {
+  const { transcript, resetTranscript } = useSpeechRecognition()
+
+  if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
+    return null
+  }
+
+  return (
+    <div>
+      <button onClick={SpeechRecognition.startListening}>Start</button>
+      <button onClick={SpeechRecognition.stopListening}>Stop</button>
+      <button onClick={resetTranscript}>Reset</button>
+      <p>{transcript}</p>
+    </div>
+  )
+}
 
 function App() {
   return (
@@ -19,6 +39,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <Dictaphone></Dictaphone>
     </div>
   );
 }

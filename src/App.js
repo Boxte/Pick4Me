@@ -1,48 +1,51 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from "react";
+import logo from "./logo.svg";
 
-import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 
-import './App.css';
+import "./App.css";
 
-import { getAnswerFrom } from '../src/js/actions';
+import { getAnswerFrom } from "../src/js/actions";
+import { MicrophoneButton } from "./js/components/MicrophoneButton";
 
 const Dictaphone = () => {
-  const { transcript, resetTranscript } = useSpeechRecognition()
-
-  if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-    return null
-  }
-
   return (
     <div>
       <button onClick={SpeechRecognition.startListening}>Start</button>
       <button onClick={SpeechRecognition.stopListening}>Stop</button>
-      <button onClick={resetTranscript}>Reset</button>
+      {/* <button onClick={resetTranscript}>Reset</button> */}
       <button onClick={() => getAnswerFrom("I want chinese")}>Call</button>
-      <p>{transcript}</p>
     </div>
-  )
-}
+  );
+};
 
 function App() {
+  const { transcript, resetTranscript, listening } = useSpeechRecognition();
+
+  const startOrStopListening = () => {
+    if (!listening) {
+      SpeechRecognition.startListening();
+    } else {
+      SpeechRecognition.stopListening();
+    }
+  };
+
+  if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
+    return null;
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <MicrophoneButton action={startOrStopListening} listening={listening} />
+        <p>{transcript}</p>
       </header>
-      <Dictaphone></Dictaphone>
+      {/* <Dictaphone></Dictaphone> */}
     </div>
   );
 }

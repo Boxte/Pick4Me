@@ -1,9 +1,15 @@
+const witAiToken = process.env.REACT_APP_WIT_AI_TOKEN;
+
+const config = {
+    headers: { 'Authorization': `Bearer ${witAiToken}` }
+};
+
 const baseLink = "https://api.wit.ai/message";
 
-export function getAnswer() {
-    return fetch("https://jsonplaceholder.typicode.com/posts")
-        .then(response => response.json())
-        .then(json => {
-          dispatch({ type: "DATA_LOADED", payload: json });
-        });
+export function getAnswerFrom(message) {
+    fetch(`${baseLink}?q=${message}`, {
+        method:'get',
+        ...config
+    }).then(response => response.json())
+    .then(json => console.log(json));
 }

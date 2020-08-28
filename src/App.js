@@ -5,6 +5,8 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 
 import './App.css';
 
+import { getAnswerFrom } from '../src/js/actions';
+
 const Dictaphone = () => {
   const { transcript, resetTranscript } = useSpeechRecognition()
 
@@ -17,6 +19,7 @@ const Dictaphone = () => {
       <button onClick={SpeechRecognition.startListening}>Start</button>
       <button onClick={SpeechRecognition.stopListening}>Stop</button>
       <button onClick={resetTranscript}>Reset</button>
+      <button onClick={() => getAnswerFrom("I want chinese")}>Call</button>
       <p>{transcript}</p>
     </div>
   )

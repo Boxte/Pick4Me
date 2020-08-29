@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import logo from "./logo.svg";
 
 import SpeechRecognition, {
@@ -21,6 +21,14 @@ const Dictaphone = () => {
   );
 };
 
+const Transcript = (props) => {
+  return props.transcript ? (
+    <p className="transcript">{props.transcript}</p>
+  ) : (
+    <p className="transcript">&nbsp;</p>
+  );
+};
+
 function App() {
   const { transcript, resetTranscript, listening } = useSpeechRecognition();
 
@@ -33,18 +41,20 @@ function App() {
   };
 
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-    return null;
+    return (
+      <div className="App">
+        <p>Browser does not support speech recognition</p>
+      </div>
+    );
   }
 
   return (
     <div className="App">
       <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <MicrophoneButton action={startOrStopListening} listening={listening} />
-        <p>{transcript}</p>
+        <p>Pick4Me</p>
       </header>
+      <Transcript transcript={transcript} />
+      <MicrophoneButton action={startOrStopListening} listening={listening} />
       {/* <Dictaphone></Dictaphone> */}
     </div>
   );

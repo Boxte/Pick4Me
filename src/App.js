@@ -9,6 +9,7 @@ import "./App.css";
 
 import { getAnswerFrom } from "../src/js/actions";
 import { MicrophoneButton } from "./js/components/MicrophoneButton";
+import { InputSelection } from "./js/components/InputSelection";
 
 const Dictaphone = () => {
   return (
@@ -53,8 +54,18 @@ function App() {
       <header className="App-header">
         <p>Pick4Me</p>
       </header>
-      <Transcript transcript={transcript} />
-      <MicrophoneButton action={startOrStopListening} listening={listening} />
+      <div className="input-holder">
+        <div className="microphone-holder">
+          <Transcript transcript={transcript} />
+          <MicrophoneButton
+            action={startOrStopListening}
+            listening={listening}
+          />
+        </div>
+      </div>
+      <div className="input-selection-holder">
+        <InputSelection />
+      </div>
       {/* <Dictaphone></Dictaphone> */}
     </div>
   );

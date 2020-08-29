@@ -1,5 +1,4 @@
 import React, { useState, useEffect, Fragment } from "react";
-import logo from "./logo.svg";
 
 import SpeechRecognition, {
   useSpeechRecognition,
@@ -52,7 +51,12 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>Pick4Me</p>
+        <h1 className="title">Pick4Me</h1>
+        <hr className="title-divider" />
+        <p className="subtitle">
+          I'm too hungry to decide where to eat. Help me Mr. Wit!
+        </p>
+        <p className="robot-emoji">&#129302;</p>
       </header>
       <div className="input-holder">
         <div className="microphone-holder">

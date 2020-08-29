@@ -10,8 +10,32 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(26px + 6vmin);
+  font-size: 26px;
   color: rgb(0, 0, 0, 0.8);
+}
+
+.App-header .title {
+  font-size: 72px;
+  padding-top: 5px;
+  margin-bottom: 0em;
+}
+
+.App-header .title-divider {
+  width: 85%;
+  border-bottom: 1px solid #ccc;
+}
+
+.App-header .subtitle {
+  font-size: 26px;
+  font-style: italic;
+  word-wrap: normal;
+  margin: 0px;
+}
+
+.robot-emoji {
+  font-size: 72px;
+  padding: 1px;
+  margin: 0px;
 }
 
 .transcript {

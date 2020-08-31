@@ -1,0 +1,81 @@
+.text-input-overall-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-evenly;
+}
+
+.text-input-container {
+  width: inherit;
+  height: inherit;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-content: center;
+  font-size: 26px;
+}
+
+.text-input-indicator {
+  align-self: center;
+}
+
+.text-input-selection {
+  outline: 0;
+  font-size: 26px;
+  border-width: 0 0 2px;
+  border-color: black;
+  margin-left: 8px;
+}
+
+.text-input-selection:focus {
+  border-color: skyblue;
+  transition: border-color 0.5s ease-out;
+}
+
+.pick-button {
+  width: 100%;
+  height: 50%;
+
+  font-size: 24px;
+
+  background-color: rgb(49, 239, 241);
+  border: 0.5px solid silver;
+  color: rgba(0, 0, 0, 0.801);
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 16px;
+
+  transition: all 0.5s ease-out;
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.pick-button:hover {
+  background-color: rgb(49, 239, 241, 0.8);
+  transition: all 0.5s ease-out;
+}
+
+.pick-button:active {
+  transform: scale(0.98);
+  transition: transform 0.5s ease-out;
+}
+
+.pick-button:focus {
+  outline: 0;
+}
+
+.pick-button-text {
+  font-size: 30px;
+}
+
+.text-input-error-message {
+  font-size: 22px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.spacer {
+  margin-top: 30px;
+}

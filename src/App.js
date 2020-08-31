@@ -9,6 +9,7 @@ import "./App.css";
 import { getAnswerFrom } from "../src/js/actions";
 import { MicrophoneButton } from "./js/components/MicrophoneButton";
 import { InputSelection } from "./js/components/InputSelection";
+import { TextInput } from "./js/components/TextInput";
 
 const Dictaphone = () => {
   return (
@@ -40,6 +41,10 @@ function App() {
     }
   };
 
+  const handleTextSubmit = (text) => {
+    console.log(`App: ${text}`);
+  };
+
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
     return (
       <div className="App">
@@ -60,11 +65,12 @@ function App() {
       </header>
       <div className="input-holder">
         <div className="microphone-holder">
-          <Transcript transcript={transcript} />
+          {/* <Transcript transcript={transcript} />
           <MicrophoneButton
             action={startOrStopListening}
             listening={listening}
-          />
+          /> */}
+          <TextInput handleTextSubmit={handleTextSubmit} />
         </div>
       </div>
       <div className="input-selection-holder">

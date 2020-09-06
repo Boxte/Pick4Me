@@ -8,24 +8,25 @@ export const TextInput = (props) => {
   const [text, setText] = useState("");
   const [hasError, setHasError] = useState(false);
 
-  const handleTextSubmit = () => {
-    if (!text) {
+  const handleTextSubmit = (value) => {
+    if (!value) {
       setHasError(true);
       return;
     }
-    props.handleTextSubmit(text);
+    props.handleTextSubmit(value);
   };
 
   const handleTextChange = (event) => {
-    if (event.keyCode === 13) {
-      handleTextSubmit();
-    }
     const { value } = event.target;
     setText(value);
 
     if (value) {
       setHasError(false);
     }
+  };
+
+  const checkKeyPress = (event) => {
+    event.key === "Enter" && handleTextSubmit(text);
   };
 
   const ErrorMessage = () => {
@@ -46,11 +47,11 @@ export const TextInput = (props) => {
           type="text"
           value={text}
           onChange={(event) => handleTextChange(event)}
+          onKeyPress={checkKeyPress}
         />
       </div>
       <ErrorMessage />
-
-      <button className="pick-button" onClick={handleTextSubmit}>
+      <button className="pick-button" onClick={() => handleTextSubmit(text)}>
         <span className="pick-button-text">&#129302; Pick</span>
       </button>
     </div>

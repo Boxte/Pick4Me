@@ -6,7 +6,12 @@ import SpeechRecognition, {
 
 import "./App.css";
 
-import { getAnswerFrom } from "../src/js/actions";
+import {
+  getAnswerFrom,
+  readAiResponse,
+  getRandomRestaurantOption,
+  getListOfRestaurants,
+} from "../src/js/actions";
 import { MicrophoneButton } from "./js/components/MicrophoneButton";
 import { InputSelection } from "./js/components/InputSelection";
 import { TextInput } from "./js/components/TextInput";
@@ -31,6 +36,9 @@ const Transcript = (props) => {
 };
 
 function App() {
+  const [gettingAnswer, setGettingAnswer] = useState(false);
+  const [randomPick, setRandomPick] = useState({});
+
   const { transcript, resetTranscript, listening } = useSpeechRecognition();
 
   const startOrStopListening = () => {
@@ -41,8 +49,29 @@ function App() {
     }
   };
 
-  const handleTextSubmit = (text) => {
-    console.log(`App: ${text}`);
+  const handleTextSubmit = async (text) => {
+    // getAnswerFrom(text)
+    //   .then((response) => {
+    //     console.log(`huh: ${response}`);
+    //     if (response.ok) {
+    //       return response.json();
+    //     }
+    //   })
+    //   .then((json) => {
+    //     console.log(`response: ${json}`);
+    //     setRandomPick(json);
+    //     setGettingAnswer(false);
+    //   });
+    await getAnswerFrom(text).then((response) => {
+      const details = readAiResponse(response);
+      setGettingAnswer(true);
+      getListOfRestaurants(details).then((restaurantsJson) => {
+        const businesses = restaurantsJson["businesses"];
+        const option = getRandomRestaurantOption(businesses);
+        setRandomPick(option);
+        setGettingAnswer(false);
+      });
+    });
   };
 
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {

@@ -86,7 +86,7 @@ function App() {
   const [gettingAnswer, setGettingAnswer] = useState(false);
   const [randomPick, setRandomPick] = useState({});
   const [userUtterance, setUserUtterance] = useState("");
-  const [isMicrophoneAvailable, setIsMicrophoneAvailable] = useState(false);
+  const [isMicrophoneAvailable, setIsMicrophoneAvailable] = useState(true);
   const [
     isCurrentInputSelectionVoice,
     setIsCurrentInputSelectionVoice,

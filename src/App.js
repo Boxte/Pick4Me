@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Fragment } from "react";
-
+import _ from "lodash";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -15,6 +15,49 @@ import {
 import { MicrophoneButton } from "./js/components/MicrophoneButton";
 import { InputSelection } from "./js/components/InputSelection";
 import { TextInput } from "./js/components/TextInput";
+import { RestaurantResult } from "./js/components/RestaurantResult";
+
+const testJsonObj = {
+  id: "jaMCQE8yehS9g0_w2Ns23A",
+  alias: "wok-n-roll-henrico-2",
+  name: "Wok n Roll",
+  image_url:
+    "https://s3-media2.fl.yelpcdn.com/bphoto/FwygwZ4mhUXnIOrJjWHI3A/o.jpg",
+  is_closed: false,
+  url:
+    "https://www.yelp.com/biz/wok-n-roll-henrico-2?adjust_creative=AyfAt539G-Dh2_VU_Z12pw&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=AyfAt539G-Dh2_VU_Z12pw",
+  review_count: 20,
+  categories: [
+    {
+      alias: "chinese",
+      title: "Chinese",
+    },
+    {
+      alias: "japanese",
+      title: "Japanese",
+    },
+  ],
+  rating: 3.5,
+  coordinates: {
+    latitude: 37.619164,
+    longitude: -77.52125,
+  },
+  transactions: ["delivery"],
+  price: "$",
+  location: {
+    address1: "7514 W Broad St",
+    address2: "",
+    address3: "",
+    city: "Henrico",
+    zip_code: "23294",
+    country: "US",
+    state: "VA",
+    display_address: ["7514 W Broad St", "Henrico, VA 23294"],
+  },
+  phone: "+18044225048",
+  display_phone: "(804) 422-5048",
+  distance: 4460.9204,
+};
 
 const Dictaphone = () => {
   return (
@@ -38,7 +81,7 @@ const Transcript = (props) => {
 function App() {
   const [gettingAnswer, setGettingAnswer] = useState(false);
   const [randomPick, setRandomPick] = useState({});
-
+  const [userUtterance, setUserUtterance] = useState("i want chinese");
   const { transcript, resetTranscript, listening } = useSpeechRecognition();
 
   const startOrStopListening = () => {
@@ -50,18 +93,7 @@ function App() {
   };
 
   const handleTextSubmit = async (text) => {
-    // getAnswerFrom(text)
-    //   .then((response) => {
-    //     console.log(`huh: ${response}`);
-    //     if (response.ok) {
-    //       return response.json();
-    //     }
-    //   })
-    //   .then((json) => {
-    //     console.log(`response: ${json}`);
-    //     setRandomPick(json);
-    //     setGettingAnswer(false);
-    //   });
+    setUserUtterance(text);
     await getAnswerFrom(text).then((response) => {
       const details = readAiResponse(response);
       setGettingAnswer(true);
@@ -82,6 +114,26 @@ function App() {
     );
   }
 
+  const content = !_.isEmpty(randomPick) ? (
+    <div className="input-holder">
+      <div className="microphone-holder">
+        {/* <Transcript transcript={transcript} />
+    <MicrophoneButton
+      action={startOrStopListening}
+      listening={listening}
+    /> */}
+        <TextInput handleTextSubmit={handleTextSubmit} />
+      </div>
+    </div>
+  ) : (
+    <div className="input-holder">
+      <div className="restaurant-result-holder">
+        <p className="utterance">{`\"${userUtterance}\"`}</p>
+        <RestaurantResult restaurant={testJsonObj} />
+      </div>
+    </div>
+  );
+
   return (
     <div className="App">
       <header className="App-header">
@@ -92,16 +144,7 @@ function App() {
         </p>
         <p className="robot-emoji">&#129302;</p>
       </header>
-      <div className="input-holder">
-        <div className="microphone-holder">
-          {/* <Transcript transcript={transcript} />
-          <MicrophoneButton
-            action={startOrStopListening}
-            listening={listening}
-          /> */}
-          <TextInput handleTextSubmit={handleTextSubmit} />
-        </div>
-      </div>
+      {content}
       <div className="input-selection-holder">
         <InputSelection />
       </div>

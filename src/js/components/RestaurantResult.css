@@ -1,0 +1,59 @@
+.restaurant-card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  border-radius: 5px; /* 5px rounded corners */
+  margin: 0px auto 0px auto;
+  width: 75%;
+  height: 75%;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+/* On mouse-over, add a deeper shadow */
+.restaurant-card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Add some padding inside the card container */
+.container {
+  padding: 2px 16px;
+}
+
+.restaurant-card img {
+  border-radius: 5px 5px 0px 0px;
+  object-fit: cover;
+  height: 80%;
+  width: 100%;
+}
+
+.restaurant-card .title {
+  font-size: 26px;
+  color: rgb(0, 0, 0, 0.8);
+  margin: 0px;
+  margin-top: 1px;
+}
+
+.image-container {
+  position: relative;
+}
+
+.restaurant-card .details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin: 0px;
+}
+
+.circle {
+  border-radius: 50%;
+  background: red;
+  width: 50px;
+  height: 50px;
+  justify-content: center;
+  color: white;
+  position: absolute;
+  top: 6px;
+  left: 25px;
+  margin: auto;
+}

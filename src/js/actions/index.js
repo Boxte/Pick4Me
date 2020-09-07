@@ -29,9 +29,10 @@ export const getAnswerFrom = async (message) => {
 };
 
 export const getListOfRestaurants = async (details) => {
+  console.log(details["foodType"]);
   const params = {
-    term: details["foodType"],
-    limit: 50,
+    term: `${details["foodType"]} restaurants`,
+    limit: 25,
     location: 23230,
   };
   const url = corsAnywhere + baseYelpLink + new URLSearchParams(params);

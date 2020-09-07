@@ -58,6 +58,20 @@
   margin: auto;
 }
 
+.restaurant-result-holder {
+  height: inherit;
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+}
+
 .input-selection-holder {
   height: 15vh;
+}
+
+.utterance {
+  font-size: 20px;
+  font-style: italic;
 }

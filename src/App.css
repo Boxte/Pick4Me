@@ -109,3 +109,7 @@
 .redo-button:focus {
   outline: 0;
 }
+
+.supported-browsers-list {
+  text-align: justify;
+}

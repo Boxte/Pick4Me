@@ -86,11 +86,16 @@ function App() {
   const [gettingAnswer, setGettingAnswer] = useState(false);
   const [randomPick, setRandomPick] = useState({});
   const [userUtterance, setUserUtterance] = useState("");
+  const [isMicrophoneAvailable, setIsMicrophoneAvailable] = useState(false);
   const [
     isCurrentInputSelectionVoice,
     setIsCurrentInputSelectionVoice,
   ] = useState(true);
   const { transcript, resetTranscript, listening } = useSpeechRecognition();
+
+  if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
+    setIsMicrophoneAvailable(false);
+  }
 
   const startOrStopListening = () => {
     if (!listening) {
@@ -120,25 +125,30 @@ function App() {
     });
   };
 
-  if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-    return (
-      <div className="App">
-        <p>Browser does not support speech recognition</p>
-      </div>
-    );
-  }
-
   const content = _.isEmpty(randomPick) ? (
     <div className="input-holder">
       <div className="microphone-holder">
         {isCurrentInputSelectionVoice ? (
-          <div>
-            <Transcript transcript={transcript} />
-            <MicrophoneButton
-              action={startOrStopListening}
-              listening={listening}
-            />
-          </div>
+          isMicrophoneAvailable ? (
+            <div>
+              <Transcript transcript={transcript} />
+              <MicrophoneButton
+                action={startOrStopListening}
+                listening={listening}
+              />
+            </div>
+          ) : (
+            <div>
+              <h3>Mr. Wit can't hear on this browser. Use text.</h3>
+              <h4>Supported browsers</h4>
+              <ul className="supported-browsers-list">
+                <li>Chrome (desktop and Android)</li>
+                <li>Microsoft Edge</li>
+                <li>Android Webview</li>
+                <li>Samsung Internet</li>
+              </ul>
+            </div>
+          )
         ) : (
           <TextInput handleTextSubmit={handleTextSubmit} />
         )}

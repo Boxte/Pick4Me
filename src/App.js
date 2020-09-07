@@ -16,6 +16,10 @@ import { MicrophoneButton } from "./js/components/MicrophoneButton";
 import { InputSelection } from "./js/components/InputSelection";
 import { TextInput } from "./js/components/TextInput";
 import { RestaurantResult } from "./js/components/RestaurantResult";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRedoAlt } from "@fortawesome/free-solid-svg-icons";
+
+import classNames from "classnames";
 
 const testJsonObj = {
   id: "jaMCQE8yehS9g0_w2Ns23A",
@@ -114,7 +118,7 @@ function App() {
     );
   }
 
-  const content = !_.isEmpty(randomPick) ? (
+  const content = _.isEmpty(randomPick) ? (
     <div className="input-holder">
       <div className="microphone-holder">
         {/* <Transcript transcript={transcript} />
@@ -129,7 +133,16 @@ function App() {
     <div className="input-holder">
       <div className="restaurant-result-holder">
         <p className="utterance">{`\"${userUtterance}\"`}</p>
-        <RestaurantResult restaurant={testJsonObj} />
+        <RestaurantResult restaurant={randomPick} />
+        <button
+          className="redo-button"
+          onClick={() => handleTextSubmit(userUtterance)}
+        >
+          <FontAwesomeIcon icon={faRedoAlt} />
+          <span className="input-selection-button-text">
+            Let's do that again
+          </span>
+        </button>
       </div>
     </div>
   );

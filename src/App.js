@@ -85,7 +85,11 @@ const Transcript = (props) => {
 function App() {
   const [gettingAnswer, setGettingAnswer] = useState(false);
   const [randomPick, setRandomPick] = useState({});
-  const [userUtterance, setUserUtterance] = useState("i want chinese");
+  const [userUtterance, setUserUtterance] = useState("");
+  const [
+    isCurrentInputSelectionVoice,
+    setIsCurrentInputSelectionVoice,
+  ] = useState(true);
   const { transcript, resetTranscript, listening } = useSpeechRecognition();
 
   const startOrStopListening = () => {
@@ -94,6 +98,12 @@ function App() {
     } else {
       SpeechRecognition.stopListening();
     }
+  };
+
+  const handleSwitch = (val) => {
+    setUserUtterance("");
+    setRandomPick({});
+    setIsCurrentInputSelectionVoice(val);
   };
 
   const handleTextSubmit = async (text) => {
@@ -121,12 +131,17 @@ function App() {
   const content = _.isEmpty(randomPick) ? (
     <div className="input-holder">
       <div className="microphone-holder">
-        {/* <Transcript transcript={transcript} />
-    <MicrophoneButton
-      action={startOrStopListening}
-      listening={listening}
-    /> */}
-        <TextInput handleTextSubmit={handleTextSubmit} />
+        {isCurrentInputSelectionVoice ? (
+          <div>
+            <Transcript transcript={transcript} />
+            <MicrophoneButton
+              action={startOrStopListening}
+              listening={listening}
+            />
+          </div>
+        ) : (
+          <TextInput handleTextSubmit={handleTextSubmit} />
+        )}
       </div>
     </div>
   ) : (
@@ -159,7 +174,7 @@ function App() {
       </header>
       {content}
       <div className="input-selection-holder">
-        <InputSelection />
+        <InputSelection handleSwitch={handleSwitch} />
       </div>
       {/* <Dictaphone></Dictaphone> */}
     </div>

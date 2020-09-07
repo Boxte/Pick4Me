@@ -30,14 +30,6 @@ const Transcript = (props) => {
   );
 };
 
-const ExampleVoicePhrase = () => {
-  var randomNumber = Math.floor(
-    Math.random() * Math.floor(EXAMPLE_PHRASEWORDS.length)
-  );
-  const randomPhrase = EXAMPLE_PHRASEWORDS[randomNumber];
-  return <p className="example-phraseword">{randomPhrase}</p>;
-};
-
 const ErrorMessage = (props) => {
   const { hasError } = props;
   return hasError ? (
@@ -55,11 +47,18 @@ function App() {
     SpeechRecognition.browserSupportsSpeechRecognition()
   );
   const [isErrorPresent, setIsErrorPresent] = useState(false);
-
   const [
     isCurrentInputSelectionVoice,
     setIsCurrentInputSelectionVoice,
   ] = useState(true);
+
+  var randomNumber = Math.floor(
+    Math.random() * Math.floor(EXAMPLE_PHRASEWORDS.length)
+  );
+  const [randomPhrase, setRandomPhrase] = useState(
+    EXAMPLE_PHRASEWORDS[randomNumber]
+  );
+
   const {
     transcript,
     resetTranscript,
@@ -82,6 +81,11 @@ function App() {
     setRandomPick({});
     setIsCurrentInputSelectionVoice(val);
     resetTranscript();
+
+    randomNumber = Math.floor(
+      Math.random() * Math.floor(EXAMPLE_PHRASEWORDS.length)
+    );
+    setRandomPhrase(EXAMPLE_PHRASEWORDS[randomNumber]);
   };
 
   const handleTextSubmit = async (text) => {
@@ -113,7 +117,7 @@ function App() {
               {transcript || listening ? (
                 <Transcript transcript={transcript} />
               ) : (
-                <ExampleVoicePhrase />
+                <p className="example-phraseword">{randomPhrase}</p>
               )}
               <MicrophoneButton
                 action={startOrStopListening}

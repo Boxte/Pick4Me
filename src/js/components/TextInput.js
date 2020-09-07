@@ -4,11 +4,15 @@ import { faMicrophone, faKeyboard } from "@fortawesome/free-solid-svg-icons";
 
 import "./TextInput.css";
 import { PickButton } from "./PickButton";
+import { EXAMPLE_PHRASEWORDS } from "../constants/example-phrasewords";
 
 export const TextInput = (props) => {
   const [text, setText] = useState("");
   const [hasError, setHasError] = useState(false);
-
+  const randomNumber = Math.floor(
+    Math.random() * Math.floor(EXAMPLE_PHRASEWORDS.length)
+  );
+  const [randomPhrase] = useState(EXAMPLE_PHRASEWORDS[randomNumber]);
   const handleTextSubmit = (value) => {
     if (!value) {
       setHasError(true);
@@ -44,7 +48,7 @@ export const TextInput = (props) => {
         <FontAwesomeIcon className="text-input-indicator" icon={faKeyboard} />
         <input
           className="text-input-selection"
-          placeholder="I'm feeling korean"
+          placeholder={randomPhrase}
           type="text"
           value={text}
           onChange={(event) => handleTextChange(event)}

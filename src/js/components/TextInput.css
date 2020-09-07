@@ -32,45 +32,6 @@
   transition: border-color 0.5s ease-out;
 }
 
-.pick-button {
-  width: 100%;
-  height: 50%;
-
-  font-size: 24px;
-
-  background-color: rgb(49, 239, 241);
-  border: 0.5px solid silver;
-  color: rgba(0, 0, 0, 0.801);
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  cursor: pointer;
-  border-radius: 16px;
-
-  transition: all 0.5s ease-out;
-
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.pick-button:hover {
-  background-color: rgb(49, 239, 241, 0.8);
-  transition: all 0.5s ease-out;
-}
-
-.pick-button:active {
-  transform: scale(0.98);
-  transition: transform 0.5s ease-out;
-}
-
-.pick-button:focus {
-  outline: 0;
-}
-
-.pick-button-text {
-  font-size: 30px;
-}
-
 .text-input-error-message {
   font-size: 22px;
   color: rgba(0, 0, 0, 0.8);

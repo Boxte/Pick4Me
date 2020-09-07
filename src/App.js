@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState } from "react";
 import _ from "lodash";
 import SpeechRecognition, {
   useSpeechRecognition,
@@ -19,60 +19,8 @@ import { RestaurantResult } from "./js/components/RestaurantResult";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRedoAlt } from "@fortawesome/free-solid-svg-icons";
 
-import classNames from "classnames";
-
-const testJsonObj = {
-  id: "jaMCQE8yehS9g0_w2Ns23A",
-  alias: "wok-n-roll-henrico-2",
-  name: "Wok n Roll",
-  image_url:
-    "https://s3-media2.fl.yelpcdn.com/bphoto/FwygwZ4mhUXnIOrJjWHI3A/o.jpg",
-  is_closed: false,
-  url:
-    "https://www.yelp.com/biz/wok-n-roll-henrico-2?adjust_creative=AyfAt539G-Dh2_VU_Z12pw&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=AyfAt539G-Dh2_VU_Z12pw",
-  review_count: 20,
-  categories: [
-    {
-      alias: "chinese",
-      title: "Chinese",
-    },
-    {
-      alias: "japanese",
-      title: "Japanese",
-    },
-  ],
-  rating: 3.5,
-  coordinates: {
-    latitude: 37.619164,
-    longitude: -77.52125,
-  },
-  transactions: ["delivery"],
-  price: "$",
-  location: {
-    address1: "7514 W Broad St",
-    address2: "",
-    address3: "",
-    city: "Henrico",
-    zip_code: "23294",
-    country: "US",
-    state: "VA",
-    display_address: ["7514 W Broad St", "Henrico, VA 23294"],
-  },
-  phone: "+18044225048",
-  display_phone: "(804) 422-5048",
-  distance: 4460.9204,
-};
-
-const Dictaphone = () => {
-  return (
-    <div>
-      <button onClick={SpeechRecognition.startListening}>Start</button>
-      <button onClick={SpeechRecognition.stopListening}>Stop</button>
-      {/* <button onClick={resetTranscript}>Reset</button> */}
-      <button onClick={() => getAnswerFrom("I want chinese")}>Call</button>
-    </div>
-  );
-};
+import { PickButton } from "./js/components/PickButton";
+import { EXAMPLE_PHRASEWORDS } from "./js/constants/example-phrasewords";
 
 const Transcript = (props) => {
   return props.transcript ? (
@@ -82,26 +30,50 @@ const Transcript = (props) => {
   );
 };
 
+const ExampleVoicePhrase = () => {
+  var randomNumber = Math.floor(
+    Math.random() * Math.floor(EXAMPLE_PHRASEWORDS.length)
+  );
+  const randomPhrase = EXAMPLE_PHRASEWORDS[randomNumber];
+  return <p className="example-phraseword">{randomPhrase}</p>;
+};
+
+const ErrorMessage = (props) => {
+  const { hasError } = props;
+  return hasError ? (
+    <p className="text-input-error-message">Tell Mr. Wit what you feeling</p>
+  ) : (
+    <p className="text-input-error-message">&nbsp;</p>
+  );
+};
+
 function App() {
   const [gettingAnswer, setGettingAnswer] = useState(false);
   const [randomPick, setRandomPick] = useState({});
   const [userUtterance, setUserUtterance] = useState("");
-  const [isMicrophoneAvailable, setIsMicrophoneAvailable] = useState(true);
+  const [isMicrophoneAvailable] = useState(
+    SpeechRecognition.browserSupportsSpeechRecognition()
+  );
+  const [isErrorPresent, setIsErrorPresent] = useState(false);
+
   const [
     isCurrentInputSelectionVoice,
     setIsCurrentInputSelectionVoice,
   ] = useState(true);
-  const { transcript, resetTranscript, listening } = useSpeechRecognition();
-
-  if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-    setIsMicrophoneAvailable(false);
-  }
+  const {
+    transcript,
+    resetTranscript,
+    finalTranscript,
+    listening,
+  } = useSpeechRecognition();
 
   const startOrStopListening = () => {
     if (!listening) {
+      resetTranscript();
       SpeechRecognition.startListening();
     } else {
       SpeechRecognition.stopListening();
+      handleTextSubmit(transcript);
     }
   };
 
@@ -109,9 +81,16 @@ function App() {
     setUserUtterance("");
     setRandomPick({});
     setIsCurrentInputSelectionVoice(val);
+    resetTranscript();
   };
 
   const handleTextSubmit = async (text) => {
+    if (_.isEmpty(text)) {
+      setIsErrorPresent(true);
+      return;
+    } else {
+      setIsErrorPresent(false);
+    }
     setUserUtterance(text);
     await getAnswerFrom(text).then((response) => {
       const details = readAiResponse(response);
@@ -131,11 +110,17 @@ function App() {
         {isCurrentInputSelectionVoice ? (
           isMicrophoneAvailable ? (
             <div>
-              <Transcript transcript={transcript} />
+              {transcript || listening ? (
+                <Transcript transcript={transcript} />
+              ) : (
+                <ExampleVoicePhrase />
+              )}
               <MicrophoneButton
                 action={startOrStopListening}
                 listening={listening}
               />
+              <ErrorMessage hasError={isErrorPresent} />
+              <PickButton handleSubmit={() => handleTextSubmit(transcript)} />
             </div>
           ) : (
             <div>
@@ -165,7 +150,7 @@ function App() {
         >
           <FontAwesomeIcon icon={faRedoAlt} />
           <span className="input-selection-button-text">
-            Let's do that again
+            I don't want this one
           </span>
         </button>
       </div>

@@ -39,11 +39,17 @@
   margin: 0px;
 }
 
-.transcript {
+.transcript,
+.example-phraseword {
   font-size: calc(20px + 2vmin);
   padding: 5px;
   width: 100%;
   color: rgb(0, 0, 0, 0.8);
+}
+
+.example-phraseword {
+  font-style: italic;
+  color: rgb(0, 0, 0, 0.5);
 }
 
 .input-holder {

@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMicrophone, faKeyboard } from "@fortawesome/free-solid-svg-icons";
 
 import "./TextInput.css";
+import { PickButton } from "./PickButton";
 
 export const TextInput = (props) => {
   const [text, setText] = useState("");
@@ -51,9 +52,7 @@ export const TextInput = (props) => {
         />
       </div>
       <ErrorMessage />
-      <button className="pick-button" onClick={() => handleTextSubmit(text)}>
-        <span className="pick-button-text">&#129302; Pick</span>
-      </button>
+      <PickButton handleSubmit={() => handleTextSubmit(text)} />
     </div>
   );
 };

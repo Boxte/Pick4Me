@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/Pick4Me/static/css/main.3464046d.chunk.css",
-    "main.js": "/Pick4Me/static/js/main.699a3b4b.chunk.js",
-    "main.js.map": "/Pick4Me/static/js/main.699a3b4b.chunk.js.map",
+    "main.css": "/Pick4Me/static/css/main.21085af9.chunk.css",
+    "main.js": "/Pick4Me/static/js/main.ffb5453d.chunk.js",
+    "main.js.map": "/Pick4Me/static/js/main.ffb5453d.chunk.js.map",
     "runtime-main.js": "/Pick4Me/static/js/runtime-main.98b36342.js",
     "runtime-main.js.map": "/Pick4Me/static/js/runtime-main.98b36342.js.map",
-    "static/js/2.0a43c6e3.chunk.js": "/Pick4Me/static/js/2.0a43c6e3.chunk.js",
-    "static/js/2.0a43c6e3.chunk.js.map": "/Pick4Me/static/js/2.0a43c6e3.chunk.js.map",
+    "static/js/2.4b11885d.chunk.js": "/Pick4Me/static/js/2.4b11885d.chunk.js",
+    "static/js/2.4b11885d.chunk.js.map": "/Pick4Me/static/js/2.4b11885d.chunk.js.map",
     "index.html": "/Pick4Me/index.html",
-    "precache-manifest.0c2ec31ddc2015eb3b119bcdd6e48924.js": "/Pick4Me/precache-manifest.0c2ec31ddc2015eb3b119bcdd6e48924.js",
+    "precache-manifest.c34a25455e982a5a67971dba10d0bc63.js": "/Pick4Me/precache-manifest.c34a25455e982a5a67971dba10d0bc63.js",
     "service-worker.js": "/Pick4Me/service-worker.js",
-    "static/css/main.3464046d.chunk.css.map": "/Pick4Me/static/css/main.3464046d.chunk.css.map",
-    "static/js/2.0a43c6e3.chunk.js.LICENSE.txt": "/Pick4Me/static/js/2.0a43c6e3.chunk.js.LICENSE.txt"
+    "static/css/main.21085af9.chunk.css.map": "/Pick4Me/static/css/main.21085af9.chunk.css.map",
+    "static/js/2.4b11885d.chunk.js.LICENSE.txt": "/Pick4Me/static/js/2.4b11885d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.98b36342.js",
-    "static/js/2.0a43c6e3.chunk.js",
-    "static/css/main.3464046d.chunk.css",
-    "static/js/main.699a3b4b.chunk.js"
+    "static/js/2.4b11885d.chunk.js",
+    "static/css/main.21085af9.chunk.css",
+    "static/js/main.ffb5453d.chunk.js"
   ]
 }

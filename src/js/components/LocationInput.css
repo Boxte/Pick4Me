@@ -1,0 +1,22 @@
+.location-input-container {
+  width: 100%;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.location-label {
+  font-size: 20px;
+}
+
+.location-text-input-selection {
+  outline: 0;
+  font-size: 26px;
+  border-width: 0 0 2px;
+  border-color: black;
+  margin-left: 8px;
+}
+
+.location-text-input-selection:focus {
+  border-color: skyblue;
+  transition: border-color 0.5s ease-out;
+}

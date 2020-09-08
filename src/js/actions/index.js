@@ -1,7 +1,7 @@
 import { ENTITY_ETHNCITY, ENTITY_LOCATION } from "../constants/ai-keywords";
 
 const witAiToken = process.env.REACT_APP_WIT_AI_TOKEN;
-const yelpApiToken = process.env.REACT_APP_YELP_API;
+const yelpApiToken = process.env.REACT_APP_YELP_BACKUP_API;
 
 const config = {
   headers: { Authorization: `Bearer ${witAiToken}` },
@@ -29,11 +29,10 @@ export const getAnswerFrom = async (message) => {
 };
 
 export const getListOfRestaurants = async (details) => {
-  console.log(details["foodType"]);
   const params = {
     term: `${details["foodType"]} restaurants`,
     limit: 25,
-    location: 23230,
+    location: `${details["location"]}`,
   };
   const url = corsAnywhere + baseYelpLink + new URLSearchParams(params);
 
@@ -55,14 +54,16 @@ export const getListOfRestaurants = async (details) => {
 };
 
 export const readAiResponse = (response) => {
-  console.log(typeof response);
-  console.log(response);
   const entity = response["entities"];
-  var whichType = "";
+
   var obj = {};
   if (entity.hasOwnProperty(ENTITY_ETHNCITY)) {
     const foodType = entity[ENTITY_ETHNCITY][0]["body"];
     obj["foodType"] = foodType;
+  }
+  if (entity.hasOwnProperty(ENTITY_LOCATION)) {
+    const location = entity[ENTITY_LOCATION][0]["body"];
+    obj["location"] = location;
   }
   return obj;
 };

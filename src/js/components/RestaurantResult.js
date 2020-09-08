@@ -3,9 +3,6 @@ import React from "react";
 import "./RestaurantResult.css";
 
 export const RestaurantResult = (props) => {
-  console.log("HERE");
-  console.log(props.restaurant);
-  console.log(JSON.stringify(props.restaurant));
   const { restaurant } = props;
   const {
     image_url: imageUrl,

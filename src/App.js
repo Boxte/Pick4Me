@@ -21,6 +21,7 @@ import { faRedoAlt } from "@fortawesome/free-solid-svg-icons";
 
 import { PickButton } from "./js/components/PickButton";
 import { EXAMPLE_PHRASEWORDS } from "./js/constants/example-phrasewords";
+import { LocationInput } from "./js/components/LocationInput";
 
 const Transcript = (props) => {
   return props.transcript ? (
@@ -43,6 +44,7 @@ function App() {
   const [gettingAnswer, setGettingAnswer] = useState(false);
   const [randomPick, setRandomPick] = useState({});
   const [userUtterance, setUserUtterance] = useState("");
+  const [location, setLocation] = useState("washington d.c.");
   const [isMicrophoneAvailable] = useState(
     SpeechRecognition.browserSupportsSpeechRecognition()
   );
@@ -97,15 +99,27 @@ function App() {
     }
     setUserUtterance(text);
     await getAnswerFrom(text).then((response) => {
-      const details = readAiResponse(response);
       setGettingAnswer(true);
+      const details = readAiResponse(response);
+      if (!details.hasOwnProperty("location")) {
+        details["location"] = location;
+      }
       getListOfRestaurants(details).then((restaurantsJson) => {
+        if (_.isEmpty(restaurantsJson)) {
+          setGettingAnswer(false);
+          setIsErrorPresent(true);
+          return;
+        }
         const businesses = restaurantsJson["businesses"];
         const option = getRandomRestaurantOption(businesses);
         setRandomPick(option);
         setGettingAnswer(false);
       });
     });
+  };
+
+  const handleLocationText = (text) => {
+    setLocation(text);
   };
 
   const content = _.isEmpty(randomPick) ? (
@@ -171,11 +185,11 @@ function App() {
         </p>
         <p className="robot-emoji">&#129302;</p>
       </header>
+      <LocationInput handleTextChange={handleLocationText} />
       {content}
       <div className="input-selection-holder">
         <InputSelection handleSwitch={handleSwitch} />
       </div>
-      {/* <Dictaphone></Dictaphone> */}
     </div>
   );
 }

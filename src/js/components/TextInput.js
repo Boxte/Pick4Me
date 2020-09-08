@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMicrophone, faKeyboard } from "@fortawesome/free-solid-svg-icons";
+import { faKeyboard } from "@fortawesome/free-solid-svg-icons";
 
 import "./TextInput.css";
 import { PickButton } from "./PickButton";

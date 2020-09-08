@@ -56,6 +56,9 @@ export const getListOfRestaurants = async (details) => {
   } else if (details.hasOwnProperty("restaurantType")) {
     searchTerm = details["restaurantType"];
   }
+  if (_.isEmpty(searchTerm)) {
+    searchTerm = "restaurants";
+  }
   params["term"] = searchTerm;
   const url = corsAnywhere + baseYelpLink + new URLSearchParams(params);
   console.log(url);

@@ -23,8 +23,8 @@ export const RestaurantResult = (props) => {
       <img src={imageUrl}></img>
       <p className="title">{name}</p>
       <div className="details">
-        <p>{price}</p>
-        <p>{`${rating} / 5.0 rating`}</p>
+        {price ? <p>{price}</p> : null}
+        <p>{`${rating.toFixed(1)} / 5.0 rating`}</p>
       </div>
       <div>{address}</div>
     </div>

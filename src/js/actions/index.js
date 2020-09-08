@@ -1,4 +1,13 @@
-import { ENTITY_ETHNCITY, ENTITY_LOCATION } from "../constants/ai-keywords";
+import {
+  ENTITY_ETHNCITY,
+  ENTITY_LOCATION,
+  INTENT_RESTAURANT_GET,
+  ENTITY_FOOD_TYPE,
+  ENTITY_GENERIC,
+  ENTITY_RESTAURANT_TYPE,
+} from "../constants/ai-keywords";
+
+import _ from "lodash";
 
 const witAiToken = process.env.REACT_APP_WIT_AI_TOKEN;
 const yelpApiToken = process.env.REACT_APP_YELP_BACKUP_API;
@@ -30,12 +39,26 @@ export const getAnswerFrom = async (message) => {
 
 export const getListOfRestaurants = async (details) => {
   const params = {
-    term: `${details["foodType"]} restaurants`,
+    term: `${details["foodType"]}`,
     limit: 25,
     location: `${details["location"]}`,
   };
-  const url = corsAnywhere + baseYelpLink + new URLSearchParams(params);
 
+  var searchTerm = "";
+  if (details.hasOwnProperty("foodType")) {
+    searchTerm = details["foodType"];
+    if (searchTerm === undefined) {
+      searchTerm = "restaurants";
+    }
+    if (!searchTerm.includes("restaurant")) {
+      searchTerm = searchTerm.concat(" restaurants");
+    }
+  } else if (details.hasOwnProperty("restaurantType")) {
+    searchTerm = details["restaurantType"];
+  }
+  params["term"] = searchTerm;
+  const url = corsAnywhere + baseYelpLink + new URLSearchParams(params);
+  console.log(url);
   const response = await fetch(url, {
     method: "get",
     ...yelpConfig,
@@ -54,13 +77,28 @@ export const getListOfRestaurants = async (details) => {
 };
 
 export const readAiResponse = (response) => {
+  const intent = response["intents"];
   const entity = response["entities"];
 
   var obj = {};
+
   if (entity.hasOwnProperty(ENTITY_ETHNCITY)) {
     const foodType = entity[ENTITY_ETHNCITY][0]["body"];
     obj["foodType"] = foodType;
+  } else if (
+    !_.isEmpty(intent) &&
+    intent[0]["name"] === INTENT_RESTAURANT_GET
+  ) {
+    if (entity.hasOwnProperty(ENTITY_FOOD_TYPE)) {
+      const foodType = entity[ENTITY_FOOD_TYPE][0]["body"];
+      obj["foodType"] = foodType;
+    } else if (entity.hasOwnProperty(ENTITY_GENERIC)) {
+      obj["foodType"] = "restaurants";
+    } else if (entity.hasOwnProperty(ENTITY_RESTAURANT_TYPE)) {
+      obj["restaurantType"] = entity[ENTITY_RESTAURANT_TYPE][0]["body"];
+    }
   }
+
   if (entity.hasOwnProperty(ENTITY_LOCATION)) {
     const location = entity[ENTITY_LOCATION][0]["body"];
     obj["location"] = location;

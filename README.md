@@ -27,10 +27,10 @@ Hit either the voice or text button at the bottom of the page.
 
 # Screenshots
 
-[Audio Query for Chicago](./screenshots/audio_chicago.png)
-[Result for Chicago](./screenshots/audio_chicago_result.png)
-[Text Query for Boston](./screenshots/text_boston.png)
-[Result for Boston](./screenshots/text_boston_result.png)
+![Audio Query for Chicago](./screenshots/audio_chicago.png)  
+![Result for Chicago](./screenshots/audio_chicago_result.png)  
+![Text Query for Boston](./screenshots/text_boston.png)  
+![Result for Boston](./screenshots/text_boston_result.png)
 
 # Tech Used
 

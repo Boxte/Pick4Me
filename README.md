@@ -10,6 +10,19 @@ I'm feeling like eating japanese.... Or korean... Maybe I want sushi... Or Bibim
 
 Help Mr. Wit!
 
+# How to Use Project
+
+Location can either be set manually with textbox with label 'Manually set location:' or location can be provided at the time the query is given.
+
+To use voice:  
+Select voice at the bottom of the page. Hit the red microphone button in the center of the page to start recording. An animation occurs while recording audio. Animation stops when recording is over. Hit 'Pick' button when you are satisfied with your recording. A restaurant result loads up and you can head over there to eat :). Or click 'I don't want this one' to retry again with the same query.
+
+To use text:  
+Select text at the bottom of the page. Type in what you're feeling in the text box in the center of the page. Hit 'Pick' button when you are good with what to tell Wit. A restaurant result loads up and you can head over there to eat :). Or click 'I don't want this one' to retry again with the same query.
+
+To enter a new query:  
+Hit either the voice or text button at the bottom of the page.
+
 # Tech Used
 
 - React

@@ -1,6 +1,7 @@
 # What is this?
 
-[Pick4Me Demo](https://youtu.be/LvxFzQkAFh8)
+[Pick4Me Demo on Youtube](https://youtu.be/LvxFzQkAFh8)
+<br />
 [Pick4Me Project](https://levane.github.io/Pick4Me/)
 
 I can't decide where to eat so let's have the Mr. Wit decide!
@@ -17,7 +18,9 @@ Help Mr. Wit!
 
 # Limitations
 
-This application works well on bigger screens such as desktop. I only tested this in the United States. The application gives proper options if there are enough restaurants in the city to supply the search query.
+- This application works well on bigger screens such as desktop.
+- I only tested this in the United States.
+- The application gives proper options if there are enough restaurants in the city to supply the search query.
 
 Voice support is limited to certain browsers:
 

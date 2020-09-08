@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f44de17e05855e5e5924e188a694d104",
+    "revision": "43599b46b6d271bb0ee2d0ba68e4b524",
     "url": "/Pick4Me/index.html"
   },
   {
-    "revision": "be38855e9cdaf00f173b",
+    "revision": "82ce11d547e90661c5f8",
     "url": "/Pick4Me/static/css/main.4eb77b61.chunk.css"
   },
   {
-    "revision": "8aaad4eed18d21e97783",
-    "url": "/Pick4Me/static/js/2.7c49fe48.chunk.js"
+    "revision": "ee05057e182b7e836464",
+    "url": "/Pick4Me/static/js/2.0e6c5a51.chunk.js"
   },
   {
     "revision": "c836aaadfe43dfd9fcb8ddeddfd61e18",
-    "url": "/Pick4Me/static/js/2.7c49fe48.chunk.js.LICENSE.txt"
+    "url": "/Pick4Me/static/js/2.0e6c5a51.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "be38855e9cdaf00f173b",
-    "url": "/Pick4Me/static/js/main.e1ba7c70.chunk.js"
+    "revision": "82ce11d547e90661c5f8",
+    "url": "/Pick4Me/static/js/main.962c31c0.chunk.js"
   },
   {
     "revision": "e54fd2b95d340b47fa1c",

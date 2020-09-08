@@ -85,18 +85,13 @@ export const readAiResponse = (response) => {
   if (entity.hasOwnProperty(ENTITY_ETHNCITY)) {
     const foodType = entity[ENTITY_ETHNCITY][0]["body"];
     obj["foodType"] = foodType;
-  } else if (
-    !_.isEmpty(intent) &&
-    intent[0]["name"] === INTENT_RESTAURANT_GET
-  ) {
-    if (entity.hasOwnProperty(ENTITY_FOOD_TYPE)) {
-      const foodType = entity[ENTITY_FOOD_TYPE][0]["body"];
-      obj["foodType"] = foodType;
-    } else if (entity.hasOwnProperty(ENTITY_GENERIC)) {
-      obj["foodType"] = "restaurants";
-    } else if (entity.hasOwnProperty(ENTITY_RESTAURANT_TYPE)) {
-      obj["restaurantType"] = entity[ENTITY_RESTAURANT_TYPE][0]["body"];
-    }
+  } else if (entity.hasOwnProperty(ENTITY_FOOD_TYPE)) {
+    const foodType = entity[ENTITY_FOOD_TYPE][0]["body"];
+    obj["foodType"] = foodType;
+  } else if (entity.hasOwnProperty(ENTITY_GENERIC)) {
+    obj["foodType"] = "restaurants";
+  } else if (entity.hasOwnProperty(ENTITY_RESTAURANT_TYPE)) {
+    obj["restaurantType"] = entity[ENTITY_RESTAURANT_TYPE][0]["body"];
   }
 
   if (entity.hasOwnProperty(ENTITY_LOCATION)) {
